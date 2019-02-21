@@ -42,7 +42,14 @@ function Spider($url)
 
     $video_raw_url = str_replace('playwm', 'play', $watermarkURL);
 
-    return download($video_raw_url);
+    try{
+        $result = download($video_raw_url);
+    }catch (Exception $e){
+        echo $e->getMessage();
+        return false;
+    }
+
+    return $result;
 }
 
 function download($url){
