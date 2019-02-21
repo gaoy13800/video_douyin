@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>视频播放</title>
+
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $("#resolveButton").click(function(){
+
+                var content = $("#linkUrl").val();
+
+                $.getJSON('http://127.0.0.1',{'url': content},function (res) {
+
+                    $("#showVideo")[0].style.display = "none";
+
+                    var videoPath = res.path;
+
+                    $("#videoShow").attr("src", videoPath);
+
+                    $("#showVideo")[0].style.display = "block";
+                });
+            });
+        });
+    </script>
+    
+</head>
+
+<style>
+
+    .DouyinBody{
+        background-image: url("back.jpeg");
+    }
+
+    .rawInput{
+        padding-top: 50px;
+        margin-top: 100px;
+        font-size: 50px;
+    }
+
+    .linkUrl{
+        margin-top: 50px;
+        width: 850px;
+        height: 80px;
+        font-size: 50px;
+        border-color: aquamarine;
+    }
+
+    .resolve{
+        margin-top: 70px;
+    }
+    .resolve button{
+        background: black;
+        margin-left: 150px;
+        width: 600px;
+        height: 90px;
+        font-size: 50px;
+        color: white;
+    }
+    .showVideo{
+        margin-top: 100px;
+        display: none;
+    }
+</style>
+<body class="DouyinBody">
+
+<div class="Douyin">
+
+    <div class="rawInput">
+        <span class="title">请输入分享地址</span>
+        <input class="linkUrl" id="linkUrl" type="text" placeholder="抖音作品分享链接">
+    </div>
+
+    <div class="resolve">
+        <button id="resolveButton">一键解析</button>
+    </div>
+</div>
+
+
+<div class="showVideo" id="showVideo">
+    <video src="" id="videoShow" controls="controls"></video>
+</div>
+
+</body>
+</html>
